@@ -109,7 +109,7 @@ conn.once("open", () => {
   console.log("Verbindung eröffnet");
 });
 
-httpsServer.listen(process.env.API_PORT, () => {
+server = httpsServer.listen(process.env.API_PORT, () => {
   console.log("listening on Port: ", process.env.API_PORT);
 });
 
