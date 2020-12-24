@@ -3,10 +3,19 @@ const Server = require("./models/Server");
 const Post = require("./models/Post");
 const mongoose = require("mongoose");
 const express = require("express");
+const https = require("https");
+const fs = require("fs");
 const app = express();
 
+const httpsServer = https.createServer(
+  {
+    key: fs.readFileSync("../ssl.key"),
+    cert: fs.readFileSync("../ssl.ca"),
+  },
+  app
+);
 var cors = require("cors");
-const bodyParser = require("body-parser");
+const { fstat } = require("fs");
 
 require("dotenv").config();
 const conn = mongoose.connection;
@@ -100,7 +109,7 @@ conn.once("open", () => {
   console.log("Verbindung eröffnet");
 });
 
-server = app.listen(process.env.API_PORT, () => {
+httpsServer.listen(process.env.API_PORT, () => {
   console.log("listening on Port: ", process.env.API_PORT);
 });
 
