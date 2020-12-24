@@ -10,7 +10,7 @@ const app = express();
 const httpsServer = https.createServer(
   {
     key: fs.readFileSync("../ssl.key"),
-    cert: fs.readFileSync("../ssl.ca"),
+    cert: fs.readFileSync("../ssl.cert"),
   },
   app
 );
