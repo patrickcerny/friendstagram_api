@@ -15,7 +15,6 @@ const httpsServer = https.createServer(
   app
 );
 var cors = require("cors");
-const { fstat } = require("fs");
 
 require("dotenv").config();
 const conn = mongoose.connection;
@@ -41,7 +40,6 @@ mongoose.connect(
     });
     io.on("connection", (socket) => {
       let chat = conn.collection("messages");
-      console.log("User Connected");
 
       //neue message
       socket.on("message", (msg) => {
